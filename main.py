@@ -62,7 +62,8 @@ def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
 
         tags_path = os.path.join(save_dir, f"{image_name}.txt")
         tags_list = [a.text for a in post_soup.find_all('li', class_='tag-type-general')]
-        
+        tags_list = [" ".join(tag.split(" ")[1:-1]) for tag in tags_list]
+            
         with open(tags_path, 'w') as f:
             f.write(', '.join(tags_list))
         
@@ -73,7 +74,7 @@ def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
 
 def main():
     tags = input("Enter tags: ").strip().split()
-    pages = int(input("Enter pages (0-?): ").strip().split()[0])
+    pages = int(input("Enter pages (1-?): ").strip().split()[0])
 
     for page in range(pages):
         get_gelbooru_images_and_save(tags, page)
