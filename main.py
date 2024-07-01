@@ -61,7 +61,7 @@ def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
         print(f"Saved: {image_path}")
 
         tags_path = os.path.join(save_dir, f"{image_name}.txt")
-        tags_list = [a.text for a in post_soup.find_all('li', class_='tag-type-general')]
+        tags_list = [a.text for a in post_soup.find_all('li', class_=['tag-type-character', 'tag-type-copyright', 'tag-type-general', 'tag-type-metadata', 'tag-type-artist'])]
         tags_list = [" ".join(tag.split(" ")[1:-1]) for tag in tags_list]
             
         with open(tags_path, 'w') as f:
