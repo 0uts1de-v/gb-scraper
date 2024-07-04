@@ -9,7 +9,7 @@ def sanitize_filename(filename):
     return re.sub(r'[<>:"/\\|?*]', '_', filename)
 
 
-def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
+def scrape(tags, page=1, save_dir='downloads'):
     base_url = 'https://gelbooru.com'
     tag_query = '+'.join(tags)
     url = f'{base_url}/index.php?page=post&s=list&tags={tag_query}&pid={page * 42}'
@@ -68,16 +68,17 @@ def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
             f.write(', '.join(tags_list))
         
         print(f"Saved: {tags_path}")
-        
-    print(f"Images and tags saved in {save_dir}")
 
 
 def main():
     tags = input("Enter tags: ").strip().split()
     pages = int(input("Enter pages (1-?): ").strip().split()[0])
+    save_dir = "downloads"
 
     for page in range(pages):
-        get_gelbooru_images_and_save(tags, page)
+        scrape(tags=tags, page=page, save_dir=save_dir)
+    
+    print(f"Images and tags saved in {save_dir}")
 
 
 if __name__ == "__main__":
