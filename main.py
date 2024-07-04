@@ -67,7 +67,7 @@ def get_gelbooru_images_and_save(tags, page=1, save_dir='downloads'):
         with open(tags_path, 'w') as f:
             f.write(', '.join(tags_list))
         
-        print(f"Saved: {image_name}.txt")
+        print(f"Saved: {tags_path}")
         
     print(f"Images and tags saved in {save_dir}")
 
